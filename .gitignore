@@ -1,0 +1,12 @@
+node_modules
+
+/.cache
+/build
+.env
+.DS_Store
+.idea/
+.vscode/
+*.swp
+public/build/
+coverage/
+*.log

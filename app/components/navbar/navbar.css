@@ -1,0 +1,61 @@
+/* Navbar ocupa el 20% de la altura de la pantalla */
+.navbar {
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-logo img {
+  margin: 0 auto;
+  max-width: 55%;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0;
+}
+
+.navbar-link {
+  margin-right: 1.25rem; /* mr-5 */
+  font-weight: 500; /* font-medium */
+  color: #4b5563; /* text-gray-600 */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.navbar-link:hover {
+  color: #111827; /* text-gray-900 */
+}
+
+/* Estilos para pantalla mediana en adelante */
+@media (min-width: 768px) {
+  .navbar {
+    align-items: start;
+  }
+  .navbar-container {
+    flex-direction: row;
+    justify-content: start;
+    gap: 1rem;
+  }
+  .navbar-logo img {
+    max-width: 80%;
+  }
+  .navbar-nav {
+    margin-left: 2rem; /* ml-8 */
+    border-left: 1px solid #d1d5db; /* border-l */
+    padding-left: 2rem; /* pl-8 */
+  }
+}
