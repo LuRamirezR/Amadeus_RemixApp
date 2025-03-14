@@ -1,5 +1,5 @@
 import AvatarSelector from "../components/avatar/avatar-selector";
-import LoginForm from "../components/login/login-form";
+import LoginForm from "../components/login-form/login-form";
 import "./styles/login.css";
 
 export default function Login() {
