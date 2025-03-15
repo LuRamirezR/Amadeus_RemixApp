@@ -14,11 +14,6 @@
 }
 
 .options {
-  /* display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 30rem; */
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -34,7 +29,6 @@
   justify-content: center;
   background: #fff;
   color: #26005a;
-  padding: 0 0 0.2rem 0;
   border-radius: 0 0 0.2rem 0.2rem;
   width: 30%;
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
@@ -51,6 +45,7 @@
   width: 100%;
   height: auto;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 input[type="radio"] {
@@ -63,6 +58,7 @@ label {
   text-align: center;
   font-weight: bold;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -72,7 +68,6 @@ label {
 
   .option-content {
     width: 20%;
-    padding: 0 0 0.2rem 0;
     border-radius: 0 0 0.8rem 0.8rem;
   }
   .question-content {
