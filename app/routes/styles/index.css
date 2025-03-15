@@ -1,17 +1,17 @@
 .home {
-  height: 90vh;
-  padding: 4rem 0;
-  max-width: 72rem;
+  height: 100vh; /* Aumentar la altura total de la sección */
   margin: 0 auto;
 }
 
 .home-content {
+  height: 100%; /* Aumentar la altura del contenedor al 100% de la sección */
+  width: 100%;
   display: flex;
-  /* flex-wrap: wrap;
-    align-items: center; */
-  flex-direction: column;
+  align-items: center; 
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 }
 
 .home-text {
@@ -25,7 +25,7 @@
 .home-heading {
   font-size: 2.25rem; /* text-4xl */
   font-weight: 800; /* font-extrabold */
-  color: #111827; /* text-gray-900 */
+  color: var(--colorButtonActive-light); /* text-gray-900 */
   letter-spacing: -0.02em;
 }
 
@@ -35,12 +35,12 @@
 
 .home-highlight {
   display: inline; /* xl:inline */
-  color: #4f46e5; /* text-indigo-600 */
+  color: var(--colorBand-light);
 }
 
 .home-description {
   font-size: 1rem; /* text-base */
-  color: #6b7280; /* text-gray-500 */
+  color: var(--colorInputFont-light); /* text-gray-500 */
 }
 
 .home-buttons {
@@ -55,14 +55,14 @@
   justify-content: center;
   padding: 0.75rem 1.5rem;
   font-size: 1.125rem; /* text-lg */
-  color: white;
-  background-color: #4f46e5; /* bg-indigo-600 */
+  color: var(--colorButtonFont-light);
+  background-color: var(--colorInputBG-light); /* bg-indigo-600 */
   border-radius: 0.375rem;
   transition: background-color 0.2s;
 }
 
 .home-btn-primary:hover {
-  background-color: #4338ca; /* hover:bg-indigo-700 */
+  background-color: var(--colorButtonHover-light); /* hover:bg-indigo-700 */
 }
 
 .home-btn-secondary {
@@ -92,29 +92,3 @@
   height: auto;
 }
 
-@media (min-width: 640px) {
-  .home-content {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  .home-heading {
-    font-size: 3rem; /* sm:text-5xl */
-  }
-  .home-buttons {
-    flex-direction: row;
-  }
-}
-
-@media (min-width: 768px) {
-  .home {
-    flex-direction: row;
-  }
-  .home-text {
-    width: 50%;
-    padding: 0 0.75rem; /* md:px-3 */
-  }
-  .home-image {
-    width: 50%;
-  }
-}
