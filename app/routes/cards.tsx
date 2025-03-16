@@ -80,7 +80,7 @@ export default function Cards() {
   useEffect(() => {
     if (isFinished) {
       setTimeout(() => {
-        navigate("/");
+        navigate("/overview");
       }, 500);
     }
   }, [isFinished, navigate]);
