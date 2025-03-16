@@ -1,40 +1,72 @@
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
-import { PrismaClient } from "@prisma/client";
+import { useEffect, useState } from "react";
 import { CardQuestion } from "~/components/card-question/card-question";
 import { CardButton } from "~/components/card-button/card-button";
-import { useEffect, useState } from "react";
 import "./styles/cards.css";
 
-// Instancia del cliente de Prisma para interactuar con la base de datos
-const prisma = new PrismaClient();
+// URLs de MockAPI
+const QUESTIONS_API =
+  "https://66ad1390f009b9d5c7344ff5.mockapi.io/api/v1/questions";
+const OPTIONS_API =
+  "https://66ad1390f009b9d5c7344ff5.mockapi.io/api/v1/question_options";
 
-// Se ejecuta en el servidor antes de que el componente se renderice.
-// Función para cargar los datos iniciales de la página
-export const loader = async () => {
-  const questions = await prisma.question.findMany({
-    include: {
-      question_options: true,
-    },
+//Define los tipos de datos
+interface Option {
+  id: string;
+  question_id: string;
+  description: string;
+}
+interface Question {
+  id: string;
+  question_text: string;
+  question_options?: Option[];
+}
+
+//Define el tipo de respuesta del loader
+interface LoaderData {
+  questions: Question[];
+}
+
+//Función loader para obtener datos desde BackEnd (MockAPI)
+export const loader = async (): Promise<Response> => {
+  //obtiene la respuesta de la API de preguntas y opciones
+  const [questionResponse, optionsResponse] = await Promise.all([
+    fetch(QUESTIONS_API),
+    fetch(OPTIONS_API),
+  ]);
+
+  //Convierte las respuestas a JSON
+  const questions: Question[] = await questionResponse.json();
+  const options: Option[] = await optionsResponse.json();
+
+  //Asociar las opciones con sus preguntas
+  const questionsWithOptions: Question[] = questions.map((question) => {
+    return {
+      id: question.id,
+      question_text: question.question_text,
+      question_options: options.filter(
+        (option) => option.question_id === question.id
+      ),
+    };
   });
 
-  return json({ questions });
+  return json<LoaderData>({ questions: questionsWithOptions });
 };
 
 export default function Cards() {
   const { questions } = useLoaderData<typeof loader>();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [responses, setResponses] = useState<Record<number, number | null>>({});
-  const [isFinished, setIsFinished] = useState(false); // Estado para detectar finalización
-  const navigate = useNavigate(); // Hook para navegación manual
+  const [responses, setResponses] = useState<Record<string, string | null>>({});
+  const [isFinished, setIsFinished] = useState(false);
+  const navigate = useNavigate();
 
   const currentQuestion = questions[currentIndex];
 
   const handlePrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   };
+
   const handleNext = () => {
     if (currentIndex < questions.length - 1) setCurrentIndex(currentIndex + 1);
   };
@@ -42,20 +74,23 @@ export default function Cards() {
   const handleFinish = () => {
     console.log("Respuestas seleccionadas:", responses);
     // Aquí podrías enviar las respuestas al backend con fetch o un action de Remix
-    setIsFinished(true); // Activamos el estado para disparar el useEffect
+    setIsFinished(true);
   };
 
   useEffect(() => {
     if (isFinished) {
-      // Aquí podrías hacer una petición al backend
       setTimeout(() => {
-        navigate("/"); // Redirigir después de un pequeño retraso
-      }, 500); // 500ms para dar tiempo a ejecutar el console.log o una petición real
+        navigate("/");
+      }, 500);
     }
   }, [isFinished, navigate]);
 
-  const handleOptionChange = (questionId: number, optionId: number) => {
-    setResponses((prev) => ({ ...prev, [questionId]: optionId }));
+  const handleOptionChange = (questionId: string, optionId: string) => {
+    setResponses((prev) => {
+      const newResponses = Object.assign({}, prev); // Copia el estado actual
+      newResponses[questionId] = optionId; // Actualiza el valor específico
+      return newResponses; // Retorna el nuevo estado
+    });
   };
 
   return (
@@ -71,10 +106,8 @@ export default function Cards() {
           onOptionChange={handleOptionChange}
           selectedOption={responses[currentQuestion.id] || null}
         />
-
         <div className="cards-buttons">
           <CardButton onClick={handlePrevious}>Anterior</CardButton>
-
           {currentIndex < questions.length - 1 ? (
             <CardButton onClick={handleNext}>Siguiente</CardButton>
           ) : (

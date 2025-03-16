@@ -1,10 +1,22 @@
-import { question, question_options } from "@prisma/client";
 import "./card-question.css";
 
+// Reutilizo los tipos definidos en Cards.tsx
+interface Option {
+  id: string;
+  question_id: string;
+  description: string;
+}
+
+interface Question {
+  id: string;
+  question_text: string;
+  question_options?: Option[];
+}
+
 type CardQuestionProps = {
-  question: question & { question_options: question_options[] };
-  onOptionChange: (questionId: number, optionId: number) => void;
-  selectedOption: number | null;
+  question: Question;
+  onOptionChange: (questionId: string, optionId: string) => void;
+  selectedOption: string | null;
 };
 
 export const CardQuestion = ({
@@ -16,7 +28,7 @@ export const CardQuestion = ({
     <div className="question-container">
       <h2 className="question-content">{question.question_text}</h2>
       <div className="options">
-        {question.question_options.map((option) => (
+        {question.question_options?.map((option) => (
           <div
             key={option.id}
             className={`option-content ${
