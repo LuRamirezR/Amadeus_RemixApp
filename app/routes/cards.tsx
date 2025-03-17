@@ -1,6 +1,6 @@
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CardQuestion } from "~/components/card-question/card-question";
 import { CardButton } from "~/components/card-button/card-button";
 import "./styles/cards.css";
@@ -58,7 +58,6 @@ export default function Cards() {
   const { questions } = useLoaderData<typeof loader>();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [responses, setResponses] = useState<Record<string, string | null>>({});
-  const [isFinished, setIsFinished] = useState(false);
   const navigate = useNavigate();
 
   const currentQuestion = questions[currentIndex];
@@ -68,22 +67,23 @@ export default function Cards() {
   };
 
   const handleNext = () => {
-    if (currentIndex < questions.length - 1) setCurrentIndex(currentIndex + 1);
+    if (!responses[currentQuestion.id]) {
+      alert("Por favor, selecciona una opción antes de continuar.");
+      return;
+    }
+    setCurrentIndex(currentIndex + 1);
   };
 
   const handleFinish = () => {
-    console.log("Respuestas seleccionadas:", responses);
-    // Aquí podrías enviar las respuestas al backend con fetch o un action de Remix
-    setIsFinished(true);
+    const selectedResponses = questions.map((question: Question) => ({
+      question: question.question_text,
+      selectedOption:
+        question.question_options?.find(
+          (option: Option) => option.id === responses[question.id]
+        )?.description || "No seleccionado",
+    }));
+    navigate("/overview", { state: { responses: selectedResponses } });
   };
-
-  useEffect(() => {
-    if (isFinished) {
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
-    }
-  }, [isFinished, navigate]);
 
   const handleOptionChange = (questionId: string, optionId: string) => {
     setResponses((prev) => {
@@ -96,24 +96,61 @@ export default function Cards() {
   return (
     <div className="cards-container">
       <h1 className="cards-heading">
-        <span>El viaje ideal te está esperando ✈️💫</span>
-        <span>Cuéntanos un poco sobre ti y te diremos a dónde ir</span>
+        <span className="cards-heading-first">
+          El viaje ideal te está esperando ✈️💫
+        </span>
+        <span className="cards-heading-second">
+          Cuéntanos un poco sobre ti y te diremos a dónde ir
+        </span>
       </h1>
-      <div className="cards-content">
-        <CardQuestion
-          key={currentQuestion.id}
-          question={currentQuestion}
-          onOptionChange={handleOptionChange}
-          selectedOption={responses[currentQuestion.id] || null}
-        />
-        <div className="cards-buttons">
-          <CardButton onClick={handlePrevious}>Anterior</CardButton>
-          {currentIndex < questions.length - 1 ? (
-            <CardButton onClick={handleNext}>Siguiente</CardButton>
-          ) : (
-            <CardButton onClick={handleFinish}>
-              Conoce tu destino de viaje
+      <div className="cards-buttoncontent">
+        <div className="prev-button-container">
+          {currentIndex > 0 && (
+            <CardButton onClick={handlePrevious}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 mr-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              </svg>
             </CardButton>
+          )}
+        </div>
+
+        <div className="cards-content">
+          <CardQuestion
+            key={currentQuestion.id}
+            question={currentQuestion}
+            onOptionChange={handleOptionChange}
+            selectedOption={responses[currentQuestion.id] || null}
+          />
+        </div>
+
+        <div className="next-button-container">
+          {currentIndex < questions.length - 1 ? (
+            <CardButton onClick={handleNext}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 ml-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </CardButton>
+          ) : (
+            <CardButton onClick={handleFinish}>Vamos!</CardButton>
           )}
         </div>
       </div>
