@@ -16,6 +16,7 @@ interface Option {
   id: string;
   question_id: string;
   description: string;
+  img_description: string;
 }
 interface Question {
   id: string;

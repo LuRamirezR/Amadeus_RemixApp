@@ -22,7 +22,6 @@
 }
 
 .option-content {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +29,7 @@
   background: #fff;
   color: #26005a;
   border-radius: 0 0 0.2rem 0.2rem;
-  width: 25%;
+  width: 30%;
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
   cursor: pointer;
 }
@@ -41,24 +40,27 @@
   background: #d396ff;
 }
 
+.option-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+}
+
 .option-image {
   width: 100%;
-  height: auto;
-  margin-bottom: 0.5rem;
+  height: 240px;
+  object-fit: cover;
   cursor: pointer;
 }
 
 input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-}
-
-label {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  font-size: 0.7rem;
-  cursor: pointer;
+  display: none;
 }
 
 @media (min-width: 768px) {

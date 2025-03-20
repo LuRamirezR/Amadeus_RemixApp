@@ -36,6 +36,7 @@
   grid-template-areas:
     "cards cards cards cards"
     "prev prev next next";
+  place-items: center;
 }
 
 /* Posicionamiento [ Botón Anterior ] [  Pregunta  ] [ Botón Siguiente ] */
@@ -74,11 +75,12 @@
   }
 
   .cards-buttoncontent {
-    grid-template-columns: 0.3fr 2.5fr 0.3fr;
-    padding: 1rem;
+    grid-template-columns: 0.2fr 2.7fr 0.2fr;
     grid-template-areas:
       "prev cards next"
       "prev cards next";
+    height: 100%;
+    max-height: 30rem;
   }
 
   .cards-content {
