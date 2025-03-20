@@ -5,6 +5,7 @@ interface Option {
   id: string;
   question_id: string;
   description: string;
+  img_description: string;
 }
 
 interface Question {
@@ -43,9 +44,9 @@ export const CardQuestion = ({
               checked={selectedOption === option.id}
               onChange={() => onOptionChange(question.id, option.id)}
             />
-            <label htmlFor={`option-${option.id}`}>
+            <label htmlFor={`option-${option.id}`} className="option-label">
               <img
-                src="https://images.unsplash.com/photo-1509233725247-49e657c54213?q=80&w=1498&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={option.img_description}
                 alt={option.description}
                 className="option-image"
               />
