@@ -7,8 +7,8 @@ export default function NavBar() {
       <div className="navbar-container">
         <div className="navbar-logo">
           <img
-            src="/images/amadeus-logo-dark-sky.png"
-            alt="Amadeus logo"
+            src="/amadeus-logo-dark-sky.png"
+            alt="logo amadeus"
             className="logo"
           />
         </div>
