@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import { Link } from "react-router-dom";
 import "./styles/airlines.css";
 
@@ -8,7 +8,6 @@ const Airlines: React.FC = () => {
             {/* Sección de Aerolíneas */}
             <div className="airlines-section bg-blue-50 py-12">
                 <div className="max-w-screen-lg w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-8">
-                    {/* Texto y estadísticas */}
                     <div className="flex-1 text-center md:text-left">
                         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-6">
                             Encuentra la aerolínea perfecta para tu viaje
@@ -16,30 +15,30 @@ const Airlines: React.FC = () => {
                         <p className="text-gray-600 mb-8">
                             Con más de 400 aerolíneas asociadas, te ofrecemos opciones para cada tipo de viajero. Ya sea que busques lujo, comodidad o tarifas económicas, tenemos la aerolínea ideal para ti.
                         </p>
-                        {/* Botón modificado */}
-                        <Link
-                            to="/explore-airlines"
-                            className="inline-block px-6 py-3 text-lg font-semibold text-white bg-[#6610f2] rounded-lg shadow-md hover:bg-[#570dcf] transition-colors duration-300"
-                        >
-                            Explorar Aerolíneas
-                        </Link>
-                        {/* Estadísticas con colores actualizados */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center mt-8">
+                        <div className="flex flex-col items-center md:items-start">
+                            <Link
+                                to="/explore-airlines"
+                                className="inline-block px-6 py-3 text-lg font-semibold text-white bg-[#0c66e1] rounded-lg shadow-md hover:bg-[#0a54c5] transition-colors duration-300"
+                            >
+                                Explorar Aerolíneas
+                            </Link>
+                            <div className="h-12"></div>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
                             <div>
-                                <h3 className="text-3xl font-bold text-[#6610f2]">400+</h3>
+                                <h3 className="text-3xl font-bold text-[#0c66e1]">400+</h3>
                                 <p className="text-gray-600 mt-2">Aerolíneas</p>
                             </div>
                             <div>
-                                <h3 className="text-3xl font-bold text-[#6610f2]">1.5B+</h3>
+                                <h3 className="text-3xl font-bold text-[#0c66e1]">1.5B+</h3>
                                 <p className="text-gray-600 mt-2">Pasajeros al año</p>
                             </div>
                             <div>
-                                <h3 className="text-3xl font-bold text-[#6610f2]">50+</h3>
+                                <h3 className="text-3xl font-bold text-[#0c66e1]">50+</h3>
                                 <p className="text-gray-600 mt-2">Aliados tech</p>
                             </div>
                         </div>
                     </div>
-                    {/* Imagen avión */}
                     <div className="flex-1">
                         <img
                             src="/images/aerolinea.jpg"
@@ -51,9 +50,8 @@ const Airlines: React.FC = () => {
             </div>
 
             {/* Sección de Airbnb */}
-            <div className="airbnb-section bg-gray-50 py-12">
+            <div className="airbnb-section bg-white py-12">
                 <div className="max-w-screen-lg w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-8">
-                    {/* Imagen Airbnb */}
                     <div className="flex-1 order-2 md:order-1">
                         <img
                             src="/images/hotels.jpg"
@@ -61,7 +59,6 @@ const Airlines: React.FC = () => {
                             className="w-full h-auto md:h-80 rounded-lg shadow-lg object-cover max-w-full"
                         />
                     </div>
-                    {/* Texto Airbnb */}
                     <div className="flex-1 text-center md:text-left order-1 md:order-2">
                         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-6">
                             Encuentra el alojamiento ideal.
@@ -71,7 +68,7 @@ const Airlines: React.FC = () => {
                         </p>
                         <Link
                             to="/explore-airbnb"
-                            className="inline-block px-6 py-3 text-lg font-semibold text-white bg-[#ff5a5f] rounded-lg shadow-md hover:bg-[#e0484d] transition-colors duration-300"
+                            className="inline-block px-6 py-3 text-lg font-semibold text-white bg-[#FF514D] rounded-lg shadow-md hover:bg-[#e04540] transition-colors duration-300"
                         >
                             Explorar hoteles
                         </Link>
