@@ -1,0 +1,63 @@
+/* Ajusta el padding y margenes del hero */
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Asegurar que el contenido ocupe todo el espacio sin desbordar */
+.results {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra el contenido verticalmente */
+}
+
+/* Ajuste de la sección de destinos */
+.destinations-container {
+  background: linear-gradient(135deg,#6610f2, #111827);
+  padding: 60px 0;
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 1; /* Hace que esta sección crezca si hay espacio */
+}
+
+/* Evita que el .grid tenga un tamaño mayor al necesario */
+.grid {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-grow: 1; /* Permite que crezca sin ocupar más espacio del necesario */
+}
+
+/* Evitar problemas de scroll */
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* Evita scroll horizontal */
+  overflow-y: auto; /* Asegura que el scroll vertical funcione correctamente */
+}
+
+/* Reducir el padding en pantallas grandes para evitar espacios vacíos */
+@media (min-width: 1440px) {
+  .destinations-container {
+      padding: 4rem 0; /* Reduce padding en pantallas grandes */
+  }
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+  .hero {
+      padding: 40px 20px;
+      max-width: 90%;
+  }
+  
+  .hero h1 {
+      font-size: 1.75rem;
+  }
+  
+  .destinations-container {
+      min-height: auto;
+      padding: 40px 0;
+  }
+}

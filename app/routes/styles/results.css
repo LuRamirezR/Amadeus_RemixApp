@@ -1,45 +1,28 @@
-
-.hero {
-    padding: 80px 20px 60px; 
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto; 
+html, body {
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden; 
 }
 
-.hero h1 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    line-height: 1.3;
-}
 
-.hero p {
-    font-size: 1rem;
-    line-height: 1.5;
+.results {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
 }
 
 .destinations-container {
     background: linear-gradient(135deg, #4f46e5, #111827);
-    padding: 60px 0 80px; 
-    min-height: calc(100vh - 200px); 
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    padding: 60px 0;
+    width: 100%;
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-}
-
-.results {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .grid {
-    padding: 0 20px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    flex-grow: 1; 
+    padding: 20px;
 }
 
 @media (max-width: 768px) {
@@ -53,7 +36,63 @@ html, body {
     }
     
     .destinations-container {
-        min-height: calc(100vh - 160px);
+        min-height: auto;
         padding: 40px 0;
+    }
+
+    
+}
+
+@media (min-width: 769px) {
+    html, body {
+        overflow: hidden; 
+    }
+}
+
+
+@media (max-width: 768px) {
+    html, body {
+        overflow-y: auto; 
+    }
+}
+@media (max-width: 768px) {
+    .destination-card {
+        width: 90%; 
+        max-width: 90%;
+        margin: 0 auto; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    .grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+        box-sizing: border-box; 
+    }
+}
+@media (max-width: 768px) {
+    .grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0 5%;
+        box-sizing: border-box; 
+    }
+
+    .destination-card {
+        width: 100%; 
+        max-width: 90%; 
+        margin: 10px auto; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
