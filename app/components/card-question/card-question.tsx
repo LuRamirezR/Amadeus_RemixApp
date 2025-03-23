@@ -1,6 +1,5 @@
 import "./card-question.css";
 import { QuestionInterface } from "~/interfaces/question";
-// import { OptionInterface } from "~/interfaces/option"
 
 type CardQuestionProps = {
   question: QuestionInterface;
