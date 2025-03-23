@@ -12,7 +12,7 @@ import "./styles/cards.css";
 
 //Define el tipo de respuesta del loader
 interface LoaderData {
-  questions: QuestionInterface[];
+  questionsLoaded: QuestionInterface[];
 }
 
 //Funcion para obtener las preguntas y opciones
@@ -32,7 +32,7 @@ export const loader = async (): Promise<Response> => {
       };
     }
   );
-  return json<LoaderData>({ questions: questionsWithOptions });
+  return json<LoaderData>({ questionsLoaded: questionsWithOptions });
 };
 
 export default function Cards() {
@@ -40,6 +40,10 @@ export default function Cards() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [responses, setResponses] = useState<Record<string, string | null>>({});
   const navigate = useNavigate();
+
+  if (!questionsLoaded || questionsLoaded.length === 0) {
+    return <div>No questions available</div>;
+  }
 
   const currentQuestion = questionsLoaded[currentIndex];
 
@@ -62,6 +66,10 @@ export default function Cards() {
 
   //Función para ir a la pregunta siguiente
   const handleNextClick = () => {
+    if (!responses[currentQuestion.id]) {
+      alert("Por favor selecciona una opción antes de continuar.");
+      return;
+    }
     if (currentIndex < questionsLoaded.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
@@ -71,7 +79,9 @@ export default function Cards() {
   const handleFinishClick = () => {
     const selectedResponses = questionsLoaded.map(
       (question: QuestionInterface) => ({
+        questionId: question.id,
         question: question.questionText,
+        selectedOptionId: responses[question.id] || "No seleccionado",
         selectedOption:
           question.question_options?.find(
             (option: OptionInterface) => option.id === responses[question.id]

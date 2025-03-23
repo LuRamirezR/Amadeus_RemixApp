@@ -1,6 +1,6 @@
 const OPTIONS_API = "http://localhost:5174/api/QuestionOption";
 
-//Funcion GET a la tabla question_options - conexion al BackEnd (API)
+//Metodo GET a la tabla question_options - conexion al BackEnd (API)
 export async function getQuestionOptions() {
   try {
     const optionsResponse = await fetch(OPTIONS_API);
@@ -10,5 +10,6 @@ export async function getQuestionOptions() {
     return await optionsResponse.json();
   } catch (error) {
     console.error("Error en la peticion de opciones", error);
+    return [];
   }
 }
