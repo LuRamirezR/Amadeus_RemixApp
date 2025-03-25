@@ -7,6 +7,7 @@ import { QuestionInterface } from "~/interfaces/question";
 import { OptionInterface } from "~/interfaces/option";
 import { getQuestions } from "~/services/questionService";
 import { getQuestionOptions } from "~/services/questionOptionsService";
+import SocialMedia from "~/components/social-media/social-media";
 
 import "./styles/cards.css";
 
@@ -92,7 +93,7 @@ export default function Cards() {
   };
 
   return (
-    <div className="cards-container">
+    <div className="cards">
       <h1 className="cards-heading">
         <span className="cards-heading-first">
           El viaje ideal te está esperando ✈️💫
@@ -101,58 +102,60 @@ export default function Cards() {
           Cuéntanos un poco sobre ti y te diremos a dónde ir
         </span>
       </h1>
+      <div className="cards-container">
+        <div className="cards-buttoncontent">
+          <div className="prev-button-container">
+            {currentIndex > 0 && (
+              <CardButton onClick={handlePreviousClick}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 mr-1"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+              </CardButton>
+            )}
+          </div>
 
-      <div className="cards-buttoncontent">
-        <div className="prev-button-container">
-          {currentIndex > 0 && (
-            <CardButton onClick={handlePreviousClick}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 mr-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-              </svg>
-            </CardButton>
-          )}
-        </div>
+          <div className="cards-content">
+            <CardQuestion
+              key={currentQuestion.id}
+              question={currentQuestion}
+              onOptionChange={handleOptionChange}
+              selectedOption={responses[currentQuestion.id] || null}
+            />
+          </div>
 
-        <div className="cards-content">
-          <CardQuestion
-            key={currentQuestion.id}
-            question={currentQuestion}
-            onOptionChange={handleOptionChange}
-            selectedOption={responses[currentQuestion.id] || null}
-          />
-        </div>
-
-        <div className="next-button-container">
-          {currentIndex < questionsLoaded.length - 1 ? (
-            <CardButton onClick={handleNextClick}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 ml-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </CardButton>
-          ) : (
-            <CardButton onClick={handleFinishClick}>Vamos!</CardButton>
-          )}
+          <div className="next-button-container">
+            {currentIndex < questionsLoaded.length - 1 ? (
+              <CardButton onClick={handleNextClick}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 ml-1"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </CardButton>
+            ) : (
+              <CardButton onClick={handleFinishClick}>Vamos!</CardButton>
+            )}
+          </div>
         </div>
       </div>
+      <SocialMedia backgroundColor="#26005a" iconColor="#f8eeff" />
     </div>
   );
 }
