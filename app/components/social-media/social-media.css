@@ -1,0 +1,18 @@
+.socialmedia {
+  width: 100%;
+  display: flex;
+}
+.socialmedia-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+}
+
+@media (min-width: 640px) {
+  .socialmedia-container {
+    padding: 1rem 0;
+  }
+}

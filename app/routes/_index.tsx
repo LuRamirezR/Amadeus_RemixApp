@@ -124,7 +124,7 @@ export default function Index() {
             aventura según tus gustos y disfruta sin complicaciones.
           </p>
           <div className="home-buttons">
-            <Link to="login" className="home-btn-primary">
+            <Link to="register" className="home-btn-primary">
               Explora ahora...
               <svg
                 xmlns="http://www.w3.org/2000/svg"

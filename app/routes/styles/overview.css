@@ -1,0 +1,123 @@
+.overview {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.overview-heading {
+  width: 100%;
+  background-color: #26005a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+.overview-heading h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+}
+.overview-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.overview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 90vh;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  background-color: #f8eeff;
+  color: #26005a;
+}
+
+.overview-list {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.overview-list li {
+  background-color: #d396ff;
+  font-size: 0.8rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overview-list strong {
+  font-weight: bold;
+  color: #26005a; /* Texto morado oscuro */
+}
+
+.overview-btns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.overview-btn {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.overview-btn.back {
+  background-color: #eed5ff;
+  color: #26005a;
+}
+.overview-btn.back:hover {
+  background-color: #f6e8ff;
+}
+
+.overview-btn.next {
+  background-color: #26005a;
+  color: white;
+}
+.overview-btn.next:hover {
+  background-color: #dbceff;
+  color: #26005a;
+}
+.overview-btn.next:hover svg path {
+  stroke: #26005a;
+}
+
+@media (min-width: 768px) {
+  .overview-heading {
+    padding: 1.5rem 0;
+  }
+  .overview-heading h1 {
+    font-size: 2rem;
+  }
+  .overview-text {
+    font-size: 1.3rem;
+  }
+  .overview-list li {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+  .overview-btns {
+    margin-top: 2rem;
+  }
+
+  .overview-btn {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+}

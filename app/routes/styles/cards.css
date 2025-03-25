@@ -1,23 +1,41 @@
+.cards {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cards-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #26005a;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 1rem;
+}
+.cards-heading span {
+  display: block;
+}
+.cards-heading-first {
+  font-size: 1.2rem;
+}
+.cards-heading-second {
+  font-size: 1rem;
+  text-align: center;
+}
+
 .cards-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90vh;
   padding: 1rem;
-  max-width: 72rem;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.cards-heading {
-  color: #26005a;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.cards-heading span {
-  display: block;
+  max-width: 80rem;
+  width: 100%;
+  height: 100%;
 }
 
 /* Contenedor de la pregunta y botones */
@@ -28,11 +46,11 @@
   align-items: center;
   justify-content: center;
   background-color: #26005a;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 1rem;
   width: 100%;
-  max-width: 60rem;
-  gap: 0.5rem;
+  max-width: 70rem;
+  gap: 1rem;
   grid-template-areas:
     "cards cards cards cards"
     "prev prev next next";
@@ -66,6 +84,7 @@
 @media (min-width: 768px) {
   .cards-heading {
     margin-bottom: 1.2rem;
+    padding-top: 2rem;
   }
   .cards-heading-first {
     font-size: 1.7rem;
@@ -74,18 +93,20 @@
     font-size: 1.5rem;
   }
 
+  .cards-container {
+    padding: 2rem;
+  }
   .cards-buttoncontent {
     grid-template-columns: 0.2fr 2.7fr 0.2fr;
     grid-template-areas:
       "prev cards next"
       "prev cards next";
     height: 100%;
-    max-height: 30rem;
   }
 
   .cards-content {
-    grid-area: cards;
-    max-width: 45rem;
+    /* grid-area: cards; */
+    max-width: 55rem;
   }
 
   .prev-button-container {

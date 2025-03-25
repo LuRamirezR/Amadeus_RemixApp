@@ -1,22 +1,9 @@
 import "./card-question.css";
-
-// Reutilizo los tipos definidos en Cards.tsx
-interface Option {
-  id: string;
-  question_id: string;
-  description: string;
-  img_description: string;
-}
-
-interface Question {
-  id: string;
-  question_text: string;
-  question_options?: Option[];
-}
+import { QuestionInterface } from "~/interfaces/question";
 
 type CardQuestionProps = {
-  question: Question;
-  onOptionChange: (questionId: string, optionId: string) => void;
+  question: QuestionInterface;
+  onOptionChange: (question_id: string, option_id: string) => void;
   selectedOption: string | null;
 };
 
@@ -27,7 +14,7 @@ export const CardQuestion = ({
 }: CardQuestionProps) => {
   return (
     <div className="question-container">
-      <h2 className="question-content">{question.question_text}</h2>
+      <h2 className="question-content">{question.questionText}</h2>
       <div className="options">
         {question.question_options?.map((option) => (
           <div
@@ -46,7 +33,7 @@ export const CardQuestion = ({
             />
             <label htmlFor={`option-${option.id}`} className="option-label">
               <img
-                src={option.img_description}
+                src={option.imgDescription}
                 alt={option.description}
                 className="option-image"
               />
