@@ -1,7 +1,7 @@
 import { UserInterface } from "../interfaces/user";
 
-// const USER_API = "http://localhost:5174/api/user";
-const USER_API = "https://66ad1390f009b9d5c7344ff5.mockapi.io/api/v1/user";
+const USER_API = "http://localhost:5174/api/user";
+// const USER_API = "https://66ad1390f009b9d5c7344ff5.mockapi.io/api/v1/user";
 
 //Metodo GET para optener los usuarios a la tabla user - conexion al BackEnd (API)
 export async function getUserRegistered() {

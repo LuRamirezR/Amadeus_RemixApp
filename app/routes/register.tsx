@@ -1,8 +1,10 @@
 import { ActionFunction, redirect } from "@remix-run/node";
-import { UserInterface } from "../interfaces/user";
-import { createUserRegistered } from "../services/userService";
+import { UserInterface } from "~/interfaces/user";
+import { createUserRegistered } from "~/services/userService";
+// import RegisterForm from "~/components/register-form/register-form";
 import { Form, useActionData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
+import SocialMedia from "~/components/social-media/social-media";
 import "./styles/register.css";
 
 //Funcion para enviar los datos al backend
@@ -49,7 +51,6 @@ export default function RegisterUser() {
     localStorage.setItem("userId", userId);
     localStorage.setItem("fullName", fullName);
     localStorage.setItem("email", email);
-    //return redirect("/cards");
   };
 
   // Guarda en localStorage cuando los datos están disponibles
@@ -66,38 +67,51 @@ export default function RegisterUser() {
 
   return (
     <section className="register">
-      <div className="register-container">
-        <Form method="post">
-          <input
-            type="text"
-            name="full_name"
-            placeholder="Nombre..."
-            value={nameUser}
-            onChange={(e) => setNameUser(e.target.value)}
-            required
-          />
-          <input
-            type="text"
-            name="email"
-            placeholder="Email..."
-            value={emailUser}
-            onChange={(e) => setEmailUser(e.target.value)}
-            required
-          />
-          <label htmlFor="accept-terms">
-            <input
-              type="checkbox"
-              id="accept-terms"
-              checked={accepted}
-              onChange={(e) => setAccepted(e.target.checked)}
-            />
-            Acepto los términos y condiciones
-          </label>
-          <button type="submit" disabled={isButtonDisabled()}>
-            Registrate
-          </button>
-        </Form>
+      <div className="register-header">
+        <h1>Viaja a tu medida 🌎</h1>
       </div>
+      <div className="register-container">
+        <div className="register-form">
+          <Form method="post">
+            <input
+              type="text"
+              name="full_name"
+              placeholder="Nombre..."
+              value={nameUser}
+              onChange={(e) => setNameUser(e.target.value)}
+              required
+              className="register-input"
+            />
+            <input
+              type="text"
+              name="email"
+              placeholder="Email..."
+              value={emailUser}
+              onChange={(e) => setEmailUser(e.target.value)}
+              required
+              className="register-input"
+            />
+            <label htmlFor="accept-terms" className="register-terms">
+              <input
+                type="checkbox"
+                id="accept-terms"
+                checked={accepted}
+                onChange={(e) => setAccepted(e.target.checked)}
+              />
+              Acepto los términos y condiciones
+            </label>
+            <button
+              type="submit"
+              disabled={isButtonDisabled()}
+              className="register-btn"
+            >
+              Regístrate
+            </button>
+          </Form>
+        </div>
+      </div>
+
+      <SocialMedia backgroundColor="#000835" iconColor="#0c66e1" />
     </section>
   );
 }
