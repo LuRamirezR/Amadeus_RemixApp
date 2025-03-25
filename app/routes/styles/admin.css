@@ -1,0 +1,91 @@
+.admin-users {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.admin-users-header {
+  width: 100%;
+  background-color: #000835;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  background-image: url("/background-circles.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+}
+.admin-users-header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.admin-users-container {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-login-form {
+  max-width: 350px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 25px;
+  text-align: center;
+  background: linear-gradient(to bottom, #fff, rgba(12, 102, 225, 0.15));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #0c66e1;
+}
+
+.admin-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #1c1c1c;
+}
+
+.admin-submit-button {
+  width: 100%;
+  padding: 12px;
+  background: #0c66e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.admin-submit-button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+.admin-submit-button:hover {
+  background: #000835;
+}
+
+@media (min-width: 640px) {
+  .admin-users-header {
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem 0;
+  }
+  .admin-users-header h1 {
+    font-size: 2.3rem;
+    padding-left: 10rem;
+  }
+
+  .admin-users-container {
+    max-width: 400px;
+  }
+}
