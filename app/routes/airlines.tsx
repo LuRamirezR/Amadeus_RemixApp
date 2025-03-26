@@ -71,8 +71,7 @@ const Airlines: React.FC = () => {
                             className="inline-block px-6 py-3 text-lg font-semibold text-white bg-[#FF514D] rounded-lg shadow-md hover:bg-[#e04540] transition-colors duration-300"
                         >
                             Explorar hoteles
-                        </Link>
-                    </div>
+                        </Link>                    </div>
                 </div>
             </div>
         </div>
