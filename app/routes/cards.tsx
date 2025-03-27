@@ -1,15 +1,21 @@
 import { json } from "@remix-run/node";
-import { useLoaderData, useNavigate } from "@remix-run/react";
-import { useState } from "react";
+import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import { CardButton } from "~/components/card-button/card-button";
 import { CardQuestion } from "~/components/card-question/card-question";
 import { QuestionInterface } from "~/interfaces/question";
 import { OptionInterface } from "~/interfaces/option";
 import { getQuestions } from "~/services/questionService";
 import { getQuestionOptions } from "~/services/questionOptionsService";
-import SocialMedia from "~/components/social-media/social-media";
 
 import "./styles/cards.css";
+import SocialMedia from "~/components/social-media/social-media";
+
+//Tipo para las respuestas
+type ResponseOverview = {
+  questionId: string;
+  selectedOptionId: string;
+};
 
 //Define el tipo de respuesta del loader
 interface LoaderData {
@@ -38,9 +44,26 @@ export const loader = async (): Promise<Response> => {
 
 export default function Cards() {
   const { questionsLoaded } = useLoaderData<typeof loader>();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [responses, setResponses] = useState<Record<string, string | null>>({});
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Transforma las respuestas pasadas desde location.state (en Overview) en un objeto
+  const initialResponses = (location.state?.responses || []).reduce(
+    (acc: Record<string, string>, response: ResponseOverview) => {
+      acc[response.questionId] = response.selectedOptionId;
+      return acc;
+    },
+    {}
+  );
+
+  // Inicializa el estado de respuestas con las respuestas pasadas desde location.state
+  const [responses, setResponses] =
+    useState<Record<string, string>>(initialResponses);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    console.log("Loaded responses:", responses);
+  }, [responses]);
 
   if (!questionsLoaded || questionsLoaded.length === 0) {
     return <div>No questions available</div>;
@@ -51,7 +74,7 @@ export default function Cards() {
   //Funcion para actualizar el estado de las respuestas
   const handleOptionChange = (question_id: string, option_id: string) => {
     setResponses((prev) => {
-      const newResponses = Object.assign({}, prev); // Copia el estado actual
+      const newResponses = { ...prev }; // Copia el estado actual
       newResponses[question_id] = option_id; // Actualiza el valor específico de la respuesta
       return newResponses; // Devuelve el nuevo estado
     });

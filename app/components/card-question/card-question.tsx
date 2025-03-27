@@ -1,5 +1,6 @@
 import "./card-question.css";
 import { QuestionInterface } from "~/interfaces/question";
+import { OptionInterface } from "~/interfaces/option";
 
 type CardQuestionProps = {
   question: QuestionInterface;
@@ -16,7 +17,7 @@ export const CardQuestion = ({
     <div className="question-container">
       <h2 className="question-content">{question.questionText}</h2>
       <div className="options">
-        {question.question_options?.map((option) => (
+        {question.question_options?.map((option: OptionInterface) => (
           <div
             key={option.id}
             className={`option-content ${
