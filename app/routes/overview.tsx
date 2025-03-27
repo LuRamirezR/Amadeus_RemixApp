@@ -4,11 +4,11 @@ import {
   getIdCities,
   getCity,
   getCombinationHash,
-} from "../services/cityService";
+} from "~/services/cityService";
 import { AnswerInterface } from "~/interfaces/answer";
-import { CityInterface } from "../interfaces/city";
-import { DestinationInterface } from "../interfaces/destination";
-import SocialMedia from "../components/social-media/social-media";
+import { CityInterface } from "~/interfaces/city";
+import { DestinationInterface } from "~/interfaces/destination";
+import SocialMedia from "~/components/social-media/social-media";
 import { useEffect, useState } from "react";
 
 import "./styles/overview.css";
@@ -75,7 +75,7 @@ export default function Overview() {
     }
   };
 
-  // Genera un hash de combinación a partir de las respuestas del usuario y llama a combination
+  // Genera un hash de combinación a partir de las respuestas del usuario y llama a getCombinationHash
   const getHash = async (answers: AnswerInterface[]) => {
     let combinationAnswer: string = "";
     for (const answerUser of answers) {
@@ -93,6 +93,7 @@ export default function Overview() {
 
   // // Regresar a Cards manteniendo las selecciones
   const handleBack = () => {
+    console.log("Navigating back to /cards with responses:", responses);
     navigate("/cards", { state: { responses } });
   };
 
