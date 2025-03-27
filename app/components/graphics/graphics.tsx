@@ -6,7 +6,7 @@ import {
     Tooltip
   } from "recharts";
   
-  import "./reports.css"
+  import "../../routes/styles/reports.css"
   export default function Statics() {
     const data = [
       { name: "Playa", value: 30 },

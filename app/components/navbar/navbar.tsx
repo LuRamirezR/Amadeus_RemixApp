@@ -32,9 +32,7 @@ export default function NavBar() {
           >
             Contacto
           </a>
-          <NavLink to="/formless" className="navbar-link">
-            Reportes
-          </NavLink>
+        
         </nav>
       </div>
     </header>
