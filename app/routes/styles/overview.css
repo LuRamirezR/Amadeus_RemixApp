@@ -98,7 +98,38 @@
   stroke: #26005a;
 }
 
-@media (min-width: 768px) {
+/* Para pantallas pequeñas y laptops */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .overview-heading {
+    padding: 0.8rem 0;
+  }
+  .overview-heading h1 {
+    font-size: 1.8rem;
+  }
+  .overview-text {
+    font-size: 1.2rem;
+    padding-bottom: 0.3rem;
+  }
+  .overview-container {
+    padding: 0.5rem;
+  }
+  .overview-list li {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .overview-btns {
+    margin-top: 0;
+  }
+
+  .overview-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 1280px) {
   .overview-heading {
     padding: 1.5rem 0;
   }
