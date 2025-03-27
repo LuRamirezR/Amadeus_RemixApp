@@ -1,8 +1,15 @@
 import { useLocation, useNavigate } from "@remix-run/react";
 import { submitAnswers } from "~/services/answerService";
-// import { AnswerInterface } from "~/interfaces/answer";
+import {
+  getIdCities,
+  getCity,
+  getCombinationHash,
+} from "../services/cityService";
+import { AnswerInterface } from "~/interfaces/answer";
+import { CityInterface } from "../interfaces/city";
+import { DestinationInterface } from "../interfaces/destination";
+import SocialMedia from "../components/social-media/social-media";
 import { useEffect, useState } from "react";
-import SocialMedia from "~/components/social-media/social-media";
 
 import "./styles/overview.css";
 
@@ -26,9 +33,11 @@ export default function Overview() {
   const location = useLocation();
   const navigate = useNavigate();
   const responses: ResponseUser[] = location.state?.responses || [];
-  // const userId = localStorage.getItem("userId") || "defaultUserId";
   const [userId, setUserId] = useState("defaultUserId");
+  const [dataCity, setDataCity] = useState<CityInterface[]>([]);
+  const [isDataCityUpdated, setIsDataCityUpdated] = useState(false);
 
+  // Obtiene el userId del localStorage si está disponible y lo establece en el estado
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUserId = localStorage.getItem("userId");
@@ -36,14 +45,58 @@ export default function Overview() {
         setUserId(storedUserId);
       }
     }
-  }, []);
+    console.log("Updated dataCity:", dataCity);
+  }, [dataCity]);
 
-  // Regresar a Cards manteniendo las selecciones
+  // Navega a la página de resultados pasando dataCity en el estado de la navegación
+  useEffect(() => {
+    if (isDataCityUpdated) {
+      console.log("Final dataCity:", dataCity);
+      navigate("/results", { state: { dataCity: [...dataCity] } });
+    }
+  }, [isDataCityUpdated, dataCity, navigate]);
+
+  const fetchCityData = async (hash: string) => {
+    try {
+      const result: DestinationInterface = await getIdCities(hash);
+      console.log("API result:", result); // Verificar la respuesta de la API
+      const { firstCityId, secondCityId } = result;
+      if (firstCityId && secondCityId) {
+        const cityData: CityInterface[] = [];
+        cityData.push(await getCity(firstCityId));
+        cityData.push(await getCity(secondCityId));
+        setDataCity(cityData);
+        setIsDataCityUpdated(true);
+      } else {
+        console.error("City IDs are undefined:", result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Genera un hash de combinación a partir de las respuestas del usuario y llama a combination
+  const getHash = async (answers: AnswerInterface[]) => {
+    let combinationAnswer: string = "";
+    for (const answerUser of answers) {
+      combinationAnswer += answerUser.questionOptionId;
+    }
+    console.log(`Generated combination answer: ${combinationAnswer}`);
+    try {
+      const combinationHash = await getCombinationHash(combinationAnswer);
+      console.log(`Received combination hash: ${combinationHash}`);
+      await fetchCityData(combinationHash);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // // Regresar a Cards manteniendo las selecciones
   const handleBack = () => {
     navigate("/cards", { state: { responses } });
   };
 
-  // Enviar datos al backend
+  // Envía las respuestas del usuario al backend y obtiene los datos de las ciudades
   const handleSubmit = async () => {
     const answers = responses.map((response) => ({
       userId: parseInt(userId),
@@ -51,11 +104,14 @@ export default function Overview() {
       questionOptionId: parseInt(response.selectedOptionId),
       createdAt: new Date().toISOString(),
     }));
-    // console.log(answers);
+
+    await getHash(answers);
     await submitAnswers(answers);
-    navigate("/results");
   };
 
+  //1.Si el usuario hace clic en "Continuar", se llama a handleSubmit, que llama a getHash, que llama a combination, que llama a getIdCities, que llama a getCity.
+  //2. getCity obtiene los datos de la ciudad y actualiza el estado dataCity.
+  //3. El useEffect para dataCity y isDataCityUpdated se ejecuta y navega a la página /results con los datos de la ciudad
   return (
     <section className="overview">
       <div className="overview-heading">
