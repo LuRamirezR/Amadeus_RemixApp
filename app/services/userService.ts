@@ -1,7 +1,6 @@
 import { UserInterface } from "../interfaces/user";
 
 const USER_API = "http://localhost:5174/api/user";
-// const USER_API = "https://66ad1390f009b9d5c7344ff5.mockapi.io/api/v1/user";
 
 //Metodo GET para optener los usuarios a la tabla user - conexion al BackEnd (API)
 export async function getUserRegistered() {
@@ -35,5 +34,34 @@ export async function createUserRegistered(
     return await userResponse.json();
   } catch (error) {
     console.log("Error en la peticion POST de usuarios", error);
+  }
+}
+
+// Método PUT para actualizar el nombre del usuario
+export async function updateUserFullName(
+  id: string,
+  fullName: string
+): Promise<UserInterface | undefined> {
+  try {
+    const response = await fetch(`${USER_API}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ full_name: fullName }),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        "Error en la petición PUT para actualizar el nombre del usuario"
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(
+      "Error en la petición PUT para actualizar el nombre del usuario",
+      error
+    );
   }
 }
