@@ -1,30 +1,48 @@
 import { ActionFunction, redirect } from "@remix-run/node";
 import { UserInterface } from "~/interfaces/user";
-import { createUserRegistered } from "~/services/userService";
+import {
+  createUserRegistered,
+  getUserRegistered,
+  updateUserFullName,
+} from "~/services/userService";
 // import RegisterForm from "~/components/register-form/register-form";
+import SocialMedia from "~/components/social-media/social-media";
 import { Form, useActionData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import SocialMedia from "~/components/social-media/social-media";
 import "./styles/register.css";
 
 //Funcion para enviar los datos al backend
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const newUser: UserInterface = {
-    full_name: formData.get("full_name") as string,
-    email: formData.get("email") as string,
-  };
+  const fullName = formData.get("full_name") as string;
+  const email = formData.get("email") as string;
 
-  // Crea el usuario y recibe el ID generado
-  const createdUser: UserInterface | undefined = await createUserRegistered(
-    newUser
-  );
+  try {
+    // Obtiene todos los usuarios registrados
+    const users: UserInterface[] = await getUserRegistered();
+    const existingUser = users.find((user) => user.email === email);
 
-  if (createdUser?.id) {
+    if (existingUser) {
+      // Si el usuario ya existe, actualiza el nombre si es diferente
+      if (existingUser.full_name !== fullName) {
+        const updatedUser = await updateUserFullName(
+          existingUser.id!,
+          fullName
+        );
+        return updatedUser;
+      }
+      // Si el nombre es el mismo, retorna el usuario existente
+      return existingUser;
+    }
+
+    // Si el usuario no existe, crea uno nuevo
+    const newUser: UserInterface = { full_name: fullName, email };
+    const createdUser = await createUserRegistered(newUser);
     return createdUser;
+  } catch (error) {
+    console.error("Error al registrar o actualizar el usuario:", error);
+    return redirect("/error"); // Redirige a una página de error en caso de fallo
   }
-  // Si no se crea el usuario, devuelve un error
-  return redirect("/error"); // En caso de error
 };
 
 export default function RegisterUser() {
