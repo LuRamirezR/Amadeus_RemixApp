@@ -1,31 +1,5 @@
-.hero {
-  padding: 80px 20px;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
 
-.results {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
-.destinations-container {
-  background: linear-gradient(135deg, #0c66e1, #000835);
-  padding: 60px 0;
-  width: 100%;
-  box-sizing: border-box;
-  flex-grow: 1;
-}
-
-.grid {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-grow: 1;
-}
 
 html, body {
   height: 100%;
@@ -34,11 +8,6 @@ html, body {
   color: #1c1c1c;
 }
 
-@media (min-width: 1440px) {
-  .destinations-container {
-      padding: 4rem 0;
-  }
-}
 
 @media (max-width: 768px) {
   .hero {
@@ -50,8 +19,5 @@ html, body {
       font-size: 1.75rem;
   }
   
-  .destinations-container {
-      min-height: auto;
-      padding: 40px 0;
-  }
+  
 }
