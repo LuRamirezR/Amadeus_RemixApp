@@ -116,7 +116,12 @@ export default function RegisterUser() {
                 checked={accepted}
                 onChange={(e) => setAccepted(e.target.checked)}
               />
-              Acepto los términos y condiciones
+              <a
+                href="https://amadeus.com/es/politicas/privacy-policy"
+                target="blank"
+              >
+                Acepto los términos y condiciones
+              </a>
             </label>
             <button
               type="submit"
