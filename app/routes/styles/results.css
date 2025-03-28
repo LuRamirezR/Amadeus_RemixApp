@@ -1,18 +1,11 @@
-html, body {
-    height: auto;
-    min-height: 100vh;
-    overflow-x: hidden; 
-}
-
-
 .results {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; 
+    min-height: 90vh; 
 }
 
 .destinations-container {
-    background: linear-gradient(135deg, #0c66e1, #000835);
+    background-color: #c5d5f9;
     padding: 60px 0;
     width: 100%;
     box-sizing: border-box;

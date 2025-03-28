@@ -2,6 +2,7 @@ import { MetaFunction } from "@remix-run/node";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./styles/results.css";
 import { CityInterface } from "~/interfaces/city";
+import SocialMedia from "~/components/social-media/social-media";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Results - Explore Your Destination" }];
@@ -27,7 +28,6 @@ export default function Results() {
       </div>
 
       <div className="destinations-container flex-grow">
-        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-0 md:px-6 py-12 max-w-6xl mx-auto">
           {dataCity.map((city, index) => (
             <div
@@ -57,6 +57,9 @@ export default function Results() {
           ))}
         </div>
       </div>
+
+      {/* Agregamos el componente SocialMedia */}
+      <SocialMedia backgroundColor="#000835" iconColor="#0c66e1" />
     </section>
   );
 }
