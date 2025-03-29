@@ -1,42 +1,45 @@
-import { useEffect, useState } from "react";
-import { getUserAdmin } from "~/services/userAdminService";
-import { UserAdminInterface } from "~/interfaces/userAdmin";
-import { Form } from "@remix-run/react";
+import { useState } from "react";
+import { Form, useNavigate } from "@remix-run/react";
 import SocialMedia from "~/components/social-media/social-media";
 import "./styles/admin.css";
 
 export default function AdminUsers() {
-  const [adminUsers, setAdminUsers] = useState<UserAdminInterface[]>([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const isButtonDisabled = () => !(username && password);
 
-  useEffect(() => {
-    async function fetchAdminUsers() {
-      const users = await getUserAdmin();
-      if (users) {
-        setAdminUsers(users);
-      }
-    }
-    fetchAdminUsers();
-  }, []);
-
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const user = adminUsers.find(
-      (user) => user.username === username && user.password === password
-    );
-    if (user) {
-      // Redirect to another view or perform any action
-      console.log("Login successful");
-      // Example: navigate("/reports");
-    } else {
-      setErrorMessage("Invalid username or password");
+    setErrorMessage("");
+  
+    try {
+      const response = await fetch("http://localhost:5174/api/Auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, user_password: password }),
+        credentials: "include",
+      });
+  
+      if (!response.ok) {
+        throw new Error("Credenciales incorrectas");
+      }
+  
+      const data = await response.json(); // ⬅️ Obtenemos el token del backend
+      console.log("🔹 Token recibido:", data.token);
+  
+      sessionStorage.setItem("token", data.token);
+  
+      console.log("✅ Login exitoso, redirigiendo...");
+      navigate("/reports"); // 🔥 Ahora sí te redirige
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Error desconocido");
+      console.error("❌ Error en login:", error);
     }
   };
-
+  
   return (
     <section className="admin-users">
       <div className="admin-users-header">
