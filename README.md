@@ -1,40 +1,72 @@
-# Welcome to Remix!
+# Proyecto Frontend Amadeus
 
-- 📖 [Remix docs](https://remix.run/docs)
+Este es un proyecto desarrollado en **nodoEAFIT**, utilizando **React** con el framework **Remix** y **TypeScript**. El objetivo principal es crear una aplicación interactiva que permita a los usuarios identificar sus preferencias de viaje y, con base en sus respuestas, recomendarles destinos ideales en América y Europa.
 
-## Development
+## Descripción del Proyecto
 
-Run the dev server:
+La aplicación cuenta con las siguientes funcionalidades principales:
 
-```shellscript
-npm run dev
+- **Juego de preguntas**: Los usuarios responden una serie de preguntas para identificar sus preferencias de viaje.
+- **Recomendación de destinos**: Según las respuestas, se muestra el destino de viaje que mejor se ajusta a sus preferencias.
+- **Vista de hoteles**: Los usuarios pueden explorar los hoteles disponibles en el destino recomendado.
+- **Vista de gráficos**: Un usuario administrador tiene acceso a una sección de reportes donde puede visualizar el acumulado de todas las respuestas de los usuarios. Además, esta vista permite descargar los reportes en formato PDF.
+
+## Estructura del Proyecto
+
+La estructura del proyecto está organizada de la siguiente manera:
+
+```
+app/
+├── components/       # Componentes modulares y reutilizables de la interfaz de usuario
+├── interfaces/       # Definición de interfaces y tipos para tipado estático en TypeScript
+├── routes/           # Páginas y rutas principales de la aplicación
+│   ├── styles/       # Archivos de estilos específicos para cada ruta
+├── services/         # Lógica de negocio y funciones para realizar peticiones a la API (Backend en C# .NET)
 ```
 
-## Deployment
+## Tecnologías Utilizadas
 
-First, build your app for production:
+- **React** con el framework **Remix**
+- **TypeScript**
+- **CSS**
+- **Backend**: API desarrollada en **C# .NET** [Repositorio](https://github.com/jonathanG29/API_AMADEUS_BACK)
 
-```sh
-npm run build
-```
+## Equipo de Desarrollo
 
-Then run the app in production mode:
+Este proyecto fue desarrollado de manera colaborativa por:
 
-```sh
-npm start
-```
+- [Santiago Bohorquez](https://github.com/SantiagoBA98)
+- [Jonathan Gallego](https://github.com/jonathanG29)
+- [Sebastian Perez](https://github.com/Sebaspj7)
+- [Luisa Fda. Ramirez](https://github.com/LuRamirezR)
 
-Now you'll need to pick a host to deploy it to.
+## Cómo Ejecutar el Proyecto
 
-### DIY
+1. Clona este repositorio en tu máquina local.
+2. Asegúrate de tener instalado **Node.js** y **npm**.
+3. Instala las dependencias del proyecto ejecutando el siguiente comando en la terminal:
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+   ```bash
+   npm install
+   ```
 
-Make sure to deploy the output of `npm run build`
+4. Inicia el servidor de desarrollo con:
 
-- `build/server`
-- `build/client`
+   ```bash
+   npm run dev
+   ```
 
-## Styling
+5. Si deseas ejecutar la aplicación en modo producción:
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+   ```bash
+   npm start
+   ```
+
+6. Asegúrate de desplegar los siguientes directorios generados tras ejecutar `npm run build`:
+
+   - `build/server`
+   - `build/client`
+
+## Estilos
+
+Este proyecto utiliza [Tailwind CSS](https://tailwindcss.com/) como framework de estilos. Puedes personalizar los estilos o usar cualquier otro framework CSS de tu preferencia. Consulta la [documentación de Vite sobre CSS](https://vitejs.dev/guide/features.html#css) para más información.

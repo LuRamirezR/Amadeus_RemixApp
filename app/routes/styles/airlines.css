@@ -1,0 +1,23 @@
+
+
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #1c1c1c;
+}
+
+
+@media (max-width: 768px) {
+  .hero {
+      padding: 40px 20px;
+      max-width: 90%;
+  }
+  
+  .hero h1 {
+      font-size: 1.75rem;
+  }
+  
+  
+}

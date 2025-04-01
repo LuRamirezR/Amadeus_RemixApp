@@ -1,0 +1,92 @@
+#container_graphics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f9f9f9;
+  }
+  
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: white;
+  }
+  
+  @media (min-width: 1024px) {
+    .chart-container {
+      width: 30%;
+    }
+  }
+  
+  @media (max-width: 1023px) {
+    .chart-container {
+      width: 45%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .chart-container {
+      width: 75%;
+    }
+  }
+  
+  .chart-container:hover {
+    transform: scale(1.05);
+  }
+  
+  #pdf-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    grid-column: span 3;
+  }
+  
+  @media (max-width: 1023px) {
+    #pdf-section {
+      grid-column: span 2;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    #pdf-section {
+      grid-column: span 1;
+    }
+  }
+  
+  /* Estilo del botón */
+  #pdf-section button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  #pdf-section button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Ocultar JSON de datos */
+  pre {
+    display: none;
+  }
+  /* Habilitar el scroll solo en la página completa */
+  body {
+    overflow-y: auto;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  
+
+  

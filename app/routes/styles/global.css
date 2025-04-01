@@ -1,0 +1,39 @@
+:root {
+    /*  -  */
+    --color01: #ffffff;
+    --color02: #c5d5f9;
+    --color03: #3a8bff;
+    
+    /*  Botones fondo oscuro  */
+    /*  .buttonBG-dark {}  */
+    --colorButtonBG-dark: #0c66e1;
+    --colorButtonHover-dark: #0a2f62;
+    --colorButtonFont-dark: #ffffff;
+    --colorButtonActive-dark: #000835;
+
+    /*  Botones fondo blanco  */
+    /*  .buttonBG-light {}  */
+    --colorButtonBG-light: #0a2f62;
+    --colorButtonHover-light: #0c66e1;
+    --colorButtonFont-light: #ffffff;
+    --colorButtonActive-light: #000835;
+
+    /*  Input fondo blanco  */
+    /*  .buttonBG-light {}  */
+    --colorInputBG-light: #0a2f62;
+    --colorInputHover-light: #0c66e1;
+    --colorInputFont-light: #000835;
+    --colorInputActive-light: #000835;
+
+    
+    /*  Barras Amadeus  */
+    --colorBand-black: #000000;
+    --colorBand-dark: #000835;
+    --colorBand-medium: #0c66e1;
+    --colorBand-light: #3a8bff;
+    --colorBand-white: #ffffff;
+
+    /*  Nombre Amadeus  */
+    --colorAmadeus-dark: #000835;
+    --colorAmadeus-light: #ffffff;
+}
